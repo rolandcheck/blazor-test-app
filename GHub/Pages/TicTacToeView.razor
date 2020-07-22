@@ -1,0 +1,14 @@
+﻿@page "/tictactoe"
+@inherits GHub.Components.TicTacToeComponent
+
+<h3>TicTacToeView</h3>
+
+
+@foreach (var game in Games)
+{
+    <p>
+        @game.TicTacToeGameResult
+    </p>
+}
+
+<button @onclick="ConnectClick"></button>

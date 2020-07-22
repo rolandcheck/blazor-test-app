@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHub", "GHub\GHub.csproj", "{63C497D3-B5F6-4EAE-8689-C071737232FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{19D46BB0-16C0-4EFE-A15E-3670A7BEDA47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63C497D3-B5F6-4EAE-8689-C071737232FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C497D3-B5F6-4EAE-8689-C071737232FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C497D3-B5F6-4EAE-8689-C071737232FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C497D3-B5F6-4EAE-8689-C071737232FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D46BB0-16C0-4EFE-A15E-3670A7BEDA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D46BB0-16C0-4EFE-A15E-3670A7BEDA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D46BB0-16C0-4EFE-A15E-3670A7BEDA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D46BB0-16C0-4EFE-A15E-3670A7BEDA47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1231B7E8-EFED-4548-AE4B-EB0AF2AAA074}
+	EndGlobalSection
+EndGlobal
