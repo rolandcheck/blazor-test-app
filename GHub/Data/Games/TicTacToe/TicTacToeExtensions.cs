@@ -2,6 +2,11 @@
 {
     public static class TicTacToeExtensions
     {
-        public static void Deconstruct(this TicTacToeMove move, out TicTacToePlayer player, out int x, out int y) => (player, x, y) = move;
+        public static void Deconstruct(this TicTacToeMove move, out TicTacToePlayer player, out int x, out int y)
+        {
+            player = move.Player;
+            x = move.X;
+            y = move.Y;
+        }
     }
 }

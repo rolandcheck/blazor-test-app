@@ -1,11 +1,11 @@
 using FluentAssertions;
-using GHub.Data;
 using GHub.Data.Games.TicTacToe;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class TicTacToeGameTests
+    [TestFixture]
+    public class TicTacToeGameShould
     {
         private TicTacToeGame _game;
         private TicTacToePlayer _playerA;
@@ -25,7 +25,7 @@ namespace Tests
         }
 
         [Test]
-        public void CorrectMoveOrder1()
+        public void KeepTrackOfCorrectMoveOrder_BadMove()
         {
             _game.CurrentMove.Should().NotBe(_playerA.Mark);
 
@@ -37,7 +37,7 @@ namespace Tests
         }
 
         [Test]
-        public void CorrectMoveOrder2()
+        public void KeepTrackOfCorrectMoveOrder_GoodMove()
         {
             _game.CurrentMove.Should().Be(_playerB.Mark);
 
@@ -52,7 +52,7 @@ namespace Tests
 
 
         [Test]
-        public void IllegalMove1()
+        public void KeepTrackOfCorrectMoves_MarkSamePosition()
         {
             _game.CurrentMove.Should().Be(_playerB.Mark);
 
@@ -71,7 +71,7 @@ namespace Tests
 
 
         [Test]
-        public void RowWin()
+        public void RaiseAnEventOn_RowWin()
         {
             bool result;
 
@@ -105,7 +105,7 @@ namespace Tests
 
 
         [Test]
-        public void ColumnWin()
+        public void RaiseAnEventOn_ColumnWin()
         {
             bool result;
 
@@ -139,7 +139,7 @@ namespace Tests
 
 
         [Test]
-        public void DiagonalWin()
+        public void RaiseAnEventOn_DiagonalWin0()
         {
             bool result;
 
@@ -174,7 +174,7 @@ namespace Tests
 
 
         [Test]
-        public void Diagonal2Win()
+        public void RaiseAnEventOn_DiagonalWin1()
         {
             bool result;
 
