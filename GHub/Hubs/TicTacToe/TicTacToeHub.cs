@@ -9,9 +9,9 @@ namespace GHub.Hubs.TicTacToe
 {
     public class TicTacToeHub : Hub<ITicTacToeToClient>, ITicTacToeToServer
     {
-        private readonly EFGenericRepository<TicTacToeGame> _repository;
+        private readonly EfGenericRepository<TicTacToeGame> _repository;
 
-        public TicTacToeHub(EFGenericRepository<TicTacToeGame> repository)
+        public TicTacToeHub(EfGenericRepository<TicTacToeGame> repository)
         {
             _repository = repository;
             var t = _repository.Get();

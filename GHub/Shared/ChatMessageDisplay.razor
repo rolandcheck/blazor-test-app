@@ -1,0 +1,14 @@
+﻿@using GHub.Data.Games.Chatting
+@using System.Drawing
+
+@if (Message != null)
+{
+    <p>
+         <span style="color: @ColorTranslator.ToHtml(Message.ChatUser.UserNameColor.Color)"> @Message.ChatUser.AppUser.Email </span> : @Message.MessageText
+    </p>
+}
+@code {
+
+    [Parameter]
+    public ChatMessage Message { get; set; }
+}

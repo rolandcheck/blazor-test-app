@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace GHub.Data
 {
-    public class EFGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class EfGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public EFGenericRepository(ApplicationDbContext context)
+        public EfGenericRepository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
@@ -20,16 +21,9 @@ namespace GHub.Data
             return _dbSet;
         }
 
-        public async IAsyncEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        public IAsyncEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
         {
-            await foreach (var entity in _dbSet.AsAsyncEnumerable())
-            {
-                if (predicate(entity))
-                {
-                    yield return entity;
-                }
-            }
-
+            return AsyncEnumerable.Where(_dbSet, predicate);
         }
         public TEntity FindById(int id)
         {

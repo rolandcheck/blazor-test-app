@@ -46,7 +46,7 @@ namespace GHub
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddScoped(typeof(EFGenericRepository<>));
+            services.AddScoped(typeof(EfGenericRepository<>));
 
             services.AddSignalR();
             services.AddResponseCompression(opts =>
