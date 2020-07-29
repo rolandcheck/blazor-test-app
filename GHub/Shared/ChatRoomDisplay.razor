@@ -1,21 +1,18 @@
-﻿@using GHub.Components
-@using GHub.Data.Games.Chatting
+﻿@using GHub.Data.Games.Chatting
+@using GHub.Data
 
-    <div class="card-body" @onclick="OnClick">
-        <h5 class="card-title">@Room.Id</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-            Members: @string.Join(",", Room.ChatUsers.Select(x => x.AppUser.Email))
-        </h6>
-        
-        @{
-            var lastMessage = @Room.ChatMessages.LastOrDefault();
-        }
-        
-        @if (lastMessage != null)
-        {
-            <p class="card-text">Last message: @lastMessage.MessageText </p>
-        }
-    </div>
+<div class="card-body" @onclick="OnClick">
+    <h5 class="card-title">@Room.Name</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+        Members: @Members
+    </h6>
+
+
+    @if (LastMessage != null)
+    {
+        <p class="card-text">Last message: @LastMessage.MessageText </p>
+    }
+</div>
 
 @code {
 
@@ -24,6 +21,10 @@
 
     [Parameter]
     public Action<ChatRoom> OnChatClick { get; set; }
+
+    private string Members => string.Join(", ", Room?.ChatUsers.Select(x => x.AppUser) ?? new AppUser[] { });
+
+    private ChatMessage LastMessage => @Room?.ChatMessages?.LastOrDefault();
 
     private void OnClick(MouseEventArgs arg)
     {

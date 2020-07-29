@@ -1,7 +1,11 @@
-﻿namespace GHub.Data.Games.TicTacToe
+﻿using System;
+
+namespace GHub.Data.Games.TicTacToe
 {
-    public class TicTacToeMove : EntityBase
+    public class TicTacToeMove : IEntity
     {
+        public Guid Id { get; set; }
+
         public TicTacToeMove() { }
 
         public TicTacToeMove(TicTacToePlayer player, int x, int y)

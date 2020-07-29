@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +15,7 @@ using GHub.Data;
 using GHub.Hubs.TicTacToe;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Logging;
 
 namespace GHub
 {
@@ -29,7 +32,7 @@ namespace GHub
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AppUser, IdentityRole>(options =>
+            services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
                 {
                     options.Password.RequiredUniqueChars = 0;
                     options.Password.RequireDigit = false;
@@ -39,7 +42,20 @@ namespace GHub
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.EnableSensitiveDataLogging();
+                options.UseLoggerFactory(LoggerFactory.Create(x =>
+                {
+                    x.AddConsole();
+                    x.SetMinimumLevel(LogLevel.Trace);
+                    x.AddDebug();
+                }));
+                //options.UseInMemoryDatabase("developDb");
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+
+
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -47,6 +63,7 @@ namespace GHub
             services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped(typeof(EfGenericRepository<>));
+            services.AddTransient<DevelopDbInitializer>();
 
             services.AddSignalR();
             services.AddResponseCompression(opts =>
@@ -70,6 +87,15 @@ namespace GHub
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+                var initializer = serviceScope.ServiceProvider.GetService<DevelopDbInitializer>();
+                initializer.Initialize(context);
+                
             }
 
             app.UseResponseCompression();

@@ -1,0 +1,36 @@
+﻿@using GHub.Data.Games.Chatting
+
+<div class="col-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="p-2 bd-highlight">Chats</div>
+            <button class="btn btn-danger ml-auto p-2 text-truncate" @onclick="@OnNewChatClick">New Chat</button>
+        </div>
+        <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+                @if (Chats != null)
+                {
+                    @foreach (var chat in Chats)
+                    {
+                        <ChatRoomDisplay Room="@chat" OnChatClick="OnChatClick"/>
+                    }
+                }
+            </li>
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<ChatRoom> Chats { get; set; }
+
+    [Parameter]
+    public Action<ChatRoom> OnChatClick { get; set; }
+
+    private Task OnNewChatClick()
+    {
+        throw new NotImplementedException();
+    }
+
+}

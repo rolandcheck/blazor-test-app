@@ -3,38 +3,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    Chats
-                </div>
-                <ul class="list-group list-group-flush">
-
-                    <li class="list-group-item">
-                        @foreach (var chat in UserChats)
-                        {
-                            <ChatRoomDisplay Room="@chat" OnChatClick="SelectedChatChanged" />
-                        }
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <ChatRoomsDisplay Chats="@UserChats" OnChatClick="SelectedChatChanged"/>
         <div class="col">
-            @*// todo: extract to component*@
-            @if (SelectedChatRoom != null)
-            {
-                @foreach (var message in SelectedChatRoom.ChatMessages)
-                {
-                    <ChatMessageDisplay Message="@message"/>
-                }
-
-                <div class="form-inline">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Input you message" @bind="TypedMessage" />
-                    </div>
-                    <button type="submit" class="btn btn-primary" @onclick="OnSendMessage">Send</button>
-                </div>
-            }
+            <ChatRoomMessagesDisplay ChatRoom="@SelectedChatRoom" OnSendNewMessage="@OnSendMessage" />
         </div>
     </div>
 </div>

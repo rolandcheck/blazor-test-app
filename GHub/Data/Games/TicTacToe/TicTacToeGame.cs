@@ -4,9 +4,11 @@ using System.Linq;
 
 namespace GHub.Data.Games.TicTacToe
 {
-    public class TicTacToeGame : EntityBase
+    public class TicTacToeGame : IEntity
     {
-        private const int BoardSize  = 3;
+        public Guid Id { get; set; }
+
+        private const int BoardSize = 3;
 
         public TicTacToeMarkEnum[,] Board { get; } = new TicTacToeMarkEnum[BoardSize, BoardSize];
 
@@ -142,6 +144,5 @@ namespace GHub.Data.Games.TicTacToe
         }
 
 
-       
     }
 }

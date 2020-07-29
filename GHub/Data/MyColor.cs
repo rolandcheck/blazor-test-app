@@ -1,13 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace GHub.Data
 {
-    public class MyColor : EntityBase
+    public class MyColor : IEntity
     {
+        public Guid Id { get; set; }
         public MyColor()
         { }
 
-        private MyColor(in Color color)
+        public MyColor(in Color color)
         {
             Color = color;
         }
@@ -18,14 +20,15 @@ namespace GHub.Data
             set => Color = Color.FromArgb(value);
         }
 
-        public KnownColor KnownColor => Color.ToKnownColor();
-
         public static implicit operator MyColor(Color color)
         {
             return new MyColor(color);
         }
 
-
+        public static implicit operator Color(MyColor color)
+        {
+            return color.Color;
+        }
 
         public Color Color { get; set; }
     }

@@ -1,0 +1,53 @@
+﻿@using GHub.Data.Games.Chatting
+
+<div class="container">
+
+    @if (ChatRoom?.ChatMessages != null)
+    {
+        <div class="btn-block pull-right">
+            <button class="btn btn-link text-decoration-none" style="float: right" @onclick="CloseChat">x</button>
+        </div>
+
+        <div>
+            @foreach (var message in ChatRoom.ChatMessages)
+            {
+                <ChatMessageDisplay Message="@message" />
+            }
+        </div>
+
+
+        <div class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Input you message" @bind="NewMessageText" />
+            </div>
+            <button type="submit" class="btn btn-primary" @onclick="OnSendMessage">Send</button>
+        </div>
+    }
+</div>
+
+    @code {
+        [Parameter]
+        public ChatRoom ChatRoom { get; set; }
+
+        [Parameter]
+        public Action<string> OnSendNewMessage { get; set; }
+
+        private string NewMessageText { get; set; }
+
+        private void OnSendMessage()
+        {
+            if (string.IsNullOrWhiteSpace(NewMessageText))
+            {
+                return;
+            }
+
+            OnSendNewMessage?.Invoke(NewMessageText);
+            NewMessageText = null;
+        }
+
+        private void CloseChat()
+        {
+            ChatRoom = null;
+        }
+
+    }

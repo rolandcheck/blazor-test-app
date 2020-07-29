@@ -4,7 +4,9 @@
 @if (Message != null)
 {
     <p>
-         <span style="color: @ColorTranslator.ToHtml(Message.ChatUser.UserNameColor.Color)"> @Message.ChatUser.AppUser.Email </span> : @Message.MessageText
+         <span style="color: @ColorTranslator.ToHtml(Message.ChatUser.UserNameColor)"> @Message.ChatUser.AppUser</span>: @Message.MessageText
+        
+        <span class="small text-muted">@Message.SendTime.ToShortTimeString()</span>
     </p>
 }
 @code {

@@ -363,3 +363,6 @@ FodyWeavers.xsd
 
 # temp sqlite database
 *.db
+
+# livesharp local cfg
+*/livesharp.config
